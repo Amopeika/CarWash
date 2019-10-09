@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
+﻿
+using System;
 using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -13,7 +9,6 @@ namespace CarWash
 {
     public partial class Form2 : Form
     {
-
         CancellationTokenSource tcsHall1;
         CancellationTokenSource tcsHall2;
         CancellationTokenSource tcsHall3;
@@ -23,6 +18,7 @@ namespace CarWash
         bool IgangHall2 = false;
         bool IgangHall3 = false;
         bool IgangHall4 = false;
+
         public Form2()
         {
             InitializeComponent();
@@ -131,6 +127,7 @@ namespace CarWash
                     ctx.Send(status => lblHALL1status.Text = "KLAR", null);
                     lblHALL1status.BackColor = Color.Green;
                     IgangHall1 = false;
+                    ctx.Send(status => btnHall1Cancel.Visible = false, null);
                 }
                 //Shows a pop-up window with an error message if the user has not chosen a wash typeS
                 else if (parameters.Vasktype == 0 && !IgangHall1)
@@ -146,12 +143,12 @@ namespace CarWash
                 else
                 {
                     lblErrorMsg.BackColor = Color.Red;
+                    ctx.Send(status => lblErrorMsg.Visible = true, null);
                     ctx.Send(status => lblErrorMsg.Text = "Hall 1 er allerede igang", null);
                     Thread.Sleep(5000);
-                    lblErrorMsg.BackColor = Color.Transparent;
                     ctx.Send(status => lblErrorMsg.Text = "", null);
+                    ctx.Send(status => lblErrorMsg.Visible = false, null);
                 }
-                ctx.Send(status => btnHall1Cancel.Visible = false, null);
                 ctx.Send(status => pgbHall1.Value = 0, null);
             }
             //Catches the exception triggered by the press of the Cancelation button triggers the Cancelation Event
@@ -224,6 +221,7 @@ namespace CarWash
                     ctx.Send(status => lblHALL2status.Text = "KLAR", null);
                     lblHALL2status.BackColor = Color.Green;
                     IgangHall2 = false;
+                    ctx.Send(status => btnHall2Cancel.Visible = false, null);
                 }
                 else if (parameters.Vasktype == 0 && !IgangHall2)
                 {
@@ -237,12 +235,12 @@ namespace CarWash
                 else
                 {
                     lblErrorMsg.BackColor = Color.Red;
+                    ctx.Send(status => lblErrorMsg.Visible = true, null);
                     ctx.Send(status => lblErrorMsg.Text = "Hall 2 er allerede igang", null);
                     Thread.Sleep(5000);
-                    lblErrorMsg.BackColor = Color.Transparent;
                     ctx.Send(status => lblErrorMsg.Text = "", null);
+                    ctx.Send(status => lblErrorMsg.Visible = false, null);
                 }
-                ctx.Send(status => btnHall2Cancel.Visible = false, null);
                 ctx.Send(status => pgbHall2.Value = 0, null);
             }
             catch (Exception ex)
@@ -313,6 +311,7 @@ namespace CarWash
                     ctx.Send(status => lblHALL3status.Text = "KLAR", null);
                     lblHALL3status.BackColor = Color.Green;
                     IgangHall3 = false;
+                    ctx.Send(status => btnHall3Cancel.Visible = false, null);
                 }
                 else if (parameters.Vasktype == 0 && !IgangHall3)
                 {
@@ -326,12 +325,13 @@ namespace CarWash
                 else
                 {
                     lblErrorMsg.BackColor = Color.Red;
+                    ctx.Send(status => lblErrorMsg.Visible = true, null);
                     ctx.Send(status => lblErrorMsg.Text = "Hall 3 er allerede igang", null);
                     Thread.Sleep(5000);
                     lblErrorMsg.BackColor = Color.Transparent;
                     ctx.Send(status => lblErrorMsg.Text = "", null);
+                    ctx.Send(status => lblErrorMsg.Visible = false, null);
                 }
-                ctx.Send(status => btnHall3Cancel.Visible = false, null);
                 ctx.Send(status => pgbHall3.Value = 0, null);
             }
             catch (Exception ex)
@@ -402,6 +402,7 @@ namespace CarWash
                     ctx.Send(status => lblHALL4status.Text = "KLAR", null);
                     lblHALL4status.BackColor = Color.Green;
                     IgangHall4 = false;
+                    ctx.Send(status => btnHall4Cancel.Visible = false, null);
                 }
                 else if (parameters.Vasktype == 0 && !IgangHall4)
                 {
@@ -416,12 +417,12 @@ namespace CarWash
                 else
                 {
                     lblErrorMsg.BackColor = Color.Red;
+                    ctx.Send(status => lblErrorMsg.Visible = true, null);
                     ctx.Send(status => lblErrorMsg.Text = "Hall 4 er allerede igang", null);
                     Thread.Sleep(5000);
-                    lblErrorMsg.BackColor = Color.Transparent;
                     ctx.Send(status => lblErrorMsg.Text = "", null);
+                    ctx.Send(status => lblErrorMsg.Visible = false, null);
                 }
-                ctx.Send(status => btnHall4Cancel.Visible = false, null);
                 ctx.Send(status => pgbHall4.Value = 0, null);
             }
             catch (Exception ex)
